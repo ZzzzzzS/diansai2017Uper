@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\m1899\Documents\C++\PoweredByZZS\made_by_ZZS\diansai2017\android-build\libs\QtAndroid-bundled.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="39c89e9accbc6964314590d25dd7ef16d6278da7">
+        <dex dex="D:\m1899\Documents\C++\PoweredByZZS\made_by_ZZS\diansai2017\android-build\build\intermediates\pre-dexed\debug\QtAndroid-bundled_24db5582ef0916e5fc1b4a708b632df33f41a5bc.jar" />
+    </item>
+
+</items>

@@ -61,7 +61,6 @@
 #define __SHRT_MAX__ 32767
 #define __LDBL_MAX__ 1.7976931348623157e+308L
 #define __FRACT_MAX__ 0X7FFFP-15R
-#define __thumb2__ 1
 #define __UFRACT_FBIT__ 16
 #define __ARM_FP 12
 #define __UFRACT_MIN__ 0.0UR
@@ -71,7 +70,6 @@
 #define __LLFRACT_EPSILON__ 0x1P-63LLR
 #define __linux 1
 #define __DEC32_EPSILON__ 1E-6DF
-#define __OPTIMIZE__ 1
 #define __CHAR_UNSIGNED__ 1
 #define __UINT32_MAX__ 4294967295U
 #define __GXX_EXPERIMENTAL_CXX0X__ 1
@@ -164,6 +162,7 @@
 #define __SIZEOF_WINT_T__ 4
 #define __SA_IBIT__ 16
 #define __ULLACCUM_MIN__ 0.0ULLK
+#define __GCC_HAVE_DWARF2_CFI_ASM 1
 #define __GXX_ABI_VERSION 999999
 #define __UTA_FBIT__ 64
 #define __FLT_MIN_EXP__ (-125)
@@ -186,6 +185,7 @@
 #define __SQ_IBIT__ 0
 #define __UINT8_TYPE__ unsigned char
 #define __UHA_FBIT__ 8
+#define __NO_INLINE__ 1
 #define __SFRACT_MIN__ (-0.5HR-0.5HR)
 #define __UTQ_FBIT__ 128
 #define __FLT_MANT_DIG__ 24
@@ -216,7 +216,6 @@
 #define __UINT64_MAX__ 18446744073709551615ULL
 #define __UDQ_FBIT__ 64
 #define __INT8_TYPE__ signed char
-#define __thumb__ 1
 #define __ELF__ 1
 #define __ULFRACT_EPSILON__ 0x1P-32ULR
 #define __LLFRACT_FBIT__ 63
@@ -278,7 +277,6 @@
 #define __UINT16_TYPE__ short unsigned int
 #define __WCHAR_TYPE__ unsigned int
 #define __SIZEOF_FLOAT__ 4
-#define __THUMBEL__ 1
 #define __USQ_FBIT__ 32
 #define __pic__ 1
 #define __UINTPTR_MAX__ 4294967295U
@@ -337,7 +335,6 @@
 #define __FLT_DENORM_MIN__ 1.4012984643248171e-45F
 #define __LLFRACT_IBIT__ 0
 #define __INT8_MAX__ 127
-#define __OPTIMIZE_SIZE__ 1
 #define __PIC__ 1
 #define __UINT_FAST32_TYPE__ unsigned int
 #define __CHAR32_TYPE__ unsigned int
