@@ -28,13 +28,11 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     configwindow.cpp \
-    port.cpp \
     bluetooth.cpp
 
 HEADERS += \
         mainwindow.h \
     configwindow.h \
-    port.h \
     bluetooth.h
 
 FORMS += \

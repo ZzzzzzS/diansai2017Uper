@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QDebug>
-#include "port.h"
+#include "bluetooth.h"
 
 namespace Ui {
 class ConfigWindow;
@@ -17,18 +17,19 @@ class ConfigWindow : public QDialog
 public:
     explicit ConfigWindow(QWidget *parent = 0);
     ~ConfigWindow();
+    BlueTooth *PortBase;
 
 private slots:
-    void PortChackSlot();
-    void PortOpenSlot();
-    void PortSaveSlot();
+    void PowerSlot();
+    void ScanSlot();
+    void ConnetSlot();
+    void DisCoveredSlot(QBluetoothDeviceInfo InfoBase);
     void ReceiveSlot();
     void SendSlot();
-
+    void SaveSlot();
 
 private:
     Ui::ConfigWindow *ui;
-    void PortToRight();
 };
 
 #if _MSC_VER >= 1600

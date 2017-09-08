@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <configwindow.h>
+#include "bluetooth.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,6 +16,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    BlueTooth *PortBase;
 
 private slots:
     void ConfigSlot();

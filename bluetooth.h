@@ -22,12 +22,14 @@ public:
     void Power(bool Power);
     void SafeWrite(QString data);
     void BlueToothConnect(const QBluetoothDeviceInfo *Base);
+    void BlueToothConnect(QBluetoothDeviceInfo Base);
     void BlueToothDisConnect();
     QList<QBluetoothDeviceInfo> DeviceInfo;
     QBluetoothSocket *Socket;
+    QBluetoothDeviceInfo CurrentDeviceInfo;
 
 public slots:
-    void Discoverd(const QBluetoothDeviceInfo &info);
+
 
 private:
     QLatin1String ServiceUuid;
@@ -37,7 +39,11 @@ private:
 private slots:
     void Connected();
     void Disconnected();
-    void ConnectError();
+    //void ConnectError();
+    void Discoverd(const QBluetoothDeviceInfo &info);
+
+signals:
+    void DisCoverdSignal(QBluetoothDeviceInfo);
 };
 
 #endif // BLUETOOTH_H

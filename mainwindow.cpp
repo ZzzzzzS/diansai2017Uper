@@ -31,60 +31,37 @@ MainWindow::~MainWindow()
 
 void MainWindow::ConfigSlot()
 {
-    QObject::disconnect(&Port,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+    QObject::disconnect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
     ConfigWindow windowBase;
+    windowBase.PortBase=this->PortBase;
     windowBase.showFullScreen();
     //windowBase.show();
     windowBase.exec();
-    if(Port.isOpen())
+    if(this->PortBase->Socket->state()==QBluetoothSocket::ConnectedState)
     {
-        QObject::connect(&Port,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-        ui->PowerButton->setText("关闭串口");
+        QObject::connect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+        ui->PowerButton->setText("断开");
     }
     else
     {
-        QObject::disconnect(&Port,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-        ui->PowerButton->setText("打开串口");
+        QObject::disconnect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+        ui->PowerButton->setText("连接");
     }
 }
 
 void MainWindow::PowerSlot()
 {
-    if(ui->PowerButton->text()=="打开串口")
+    if(ui->PowerButton->text()=="连接")
         {
-            QMessageBox *a=new QMessageBox;
-            a->setIcon(QMessageBox::Information);
-            a->setParent(this);
-            a->setWindowTitle("正在打开串口");
-            a->show();
-
-            bool ok=Port.OpenPort();
-            if(ok)
-            {
-                ui->PowerButton->setText("关闭串口");
-                QObject::connect(&Port,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-            }
-            else
-            {
-                QMessageBox::information(this,"串口可能未打开","请检查设备是否未连接或被其他程序占用",QMessageBox::Yes);
-                ui->PowerButton->setText("打开串口");
-            }
-            a->close();
-
+          this->PortBase->BlueToothConnect(this->PortBase->CurrentDeviceInfo);
+          ui->PowerButton->setText("断开");
+          QObject::connect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
         }
         else
         {
-            QMessageBox a;
-            a.setIcon(QMessageBox::Information);
-            a.setWindowTitle("正在关闭串口");
-            a.show();
-
-            Port.clear();
-            Port.close();
-            QObject::disconnect(&Port,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
-            ui->PowerButton->setText("打开串口");
-
-            a.close();
+            this->PortBase->BlueToothDisConnect();
+            QObject::disconnect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+            ui->PowerButton->setText("连接");
         }
 }
 
@@ -100,65 +77,65 @@ void MainWindow::ReceiveSlot()
 
 void MainWindow::UpSlot()
 {
-    Port.SafeWrite(QByteArray("w"));
+    this->PortBase->SafeWrite("w");
 }
 
 void MainWindow::DownSlot()
 {
-    Port.SafeWrite("s");
+    this->PortBase->SafeWrite("s");
 }
 
 void MainWindow::RightSlot()
 {
-    Port.SafeWrite("f");
+    this->PortBase->SafeWrite("f");
 }
 
 void MainWindow::LeftSlot()
 {
-    Port.SafeWrite("a");
+    this->PortBase->SafeWrite("a");
 }
 
 void MainWindow::Slot1()
 {
-    Port.SafeWrite("q1");
+    this->PortBase->SafeWrite("q1");
 }
 
 void MainWindow::Slot2()
 {
-    Port.SafeWrite("q2");
+    this->PortBase->SafeWrite("q2");
 }
 
 void MainWindow::Slot3()
 {
-    Port.SafeWrite("q3");
+    this->PortBase->SafeWrite("q3");
 }
 
 void MainWindow::Slot4()
 {
-    Port.SafeWrite("q4");
+    this->PortBase->SafeWrite("q4");
 }
 
 void MainWindow::Slot5()
 {
-    Port.SafeWrite("q5");
+    this->PortBase->SafeWrite("q5");
 }
 
 void MainWindow::Slot6()
 {
-    Port.SafeWrite("q6");
+    this->PortBase->SafeWrite("q6");
 }
 
 void MainWindow::Slot7()
 {
-    Port.SafeWrite("s7");
+    this->PortBase->SafeWrite("s7");
 }
 
 void MainWindow::Slot8()
 {
-    Port.SafeWrite("q8");
+    this->PortBase->SafeWrite("q8");
 }
 
 void MainWindow::Slot9()
 {
-    Port.SafeWrite("q9");
+    this->PortBase->SafeWrite("q9");
 }

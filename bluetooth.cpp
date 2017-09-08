@@ -17,6 +17,13 @@ void BlueTooth::scan()
     QObject::connect(this->DiscoverAgent,SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),this,SLOT(Discoverd(QBluetoothDeviceInfo)));
 }
 
+void BlueTooth::Discoverd(const QBluetoothDeviceInfo &info)
+{
+    this->DeviceInfo.append(info);
+    QBluetoothDeviceInfo send=info;
+    emit DisCoverdSignal(send);
+}
+
 void BlueTooth::Power(bool Power)
 {
     if(Power==true)
@@ -31,6 +38,13 @@ void BlueTooth::BlueToothConnect(const QBluetoothDeviceInfo *Base)
 {
     QObject::disconnect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
     this->Socket->connectToService(Base->address(),QBluetoothUuid(this->ServiceUuid));
+    QObject::connect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
+}
+
+void BlueTooth::BlueToothConnect(QBluetoothDeviceInfo Base)
+{
+    QObject::disconnect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
+    this->Socket->connectToService(Base.address(),QBluetoothUuid(this->ServiceUuid));
     QObject::connect(this->Socket,SIGNAL(connected()),this,SLOT(Connected()));
 }
 
@@ -57,8 +71,12 @@ void BlueTooth::SafeWrite(QString data)
     {
         Socket->write(data.toUtf8());
     }
+    else if(this->Socket->state()==QBluetoothSocket::UnconnectedState)
+    {
+        QMessageBox::information(NULL,"蓝牙未连接","请连接蓝牙或检查是否被其他程序占用",QMessageBox::Ok);
+    }
     else
     {
-        QMessageBox::information(NULL,"错误","")
+        QMessageBox::information(NULL,"错误","请检查蓝牙是否打开",QMessageBox::Ok);
     }
 }

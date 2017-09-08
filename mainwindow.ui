@@ -274,14 +274,14 @@
          <item>
           <widget class="QPushButton" name="PowerButton">
            <property name="text">
-            <string>打开串口</string>
+            <string>连接</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="ConfigButton">
            <property name="text">
-            <string>串口设置</string>
+            <string>蓝牙设置</string>
            </property>
           </widget>
          </item>
