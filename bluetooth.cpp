@@ -10,6 +10,10 @@ BlueTooth::BlueTooth(QWidget *parent) : QWidget(parent)
 
 void BlueTooth::scan()
 {
+    if(this->LocalDevice->hostMode()==QBluetoothLocalDevice::HostPoweredOff)
+    {
+        QMessageBox::information(NULL,"蓝牙未打开","请打开蓝牙后重试",QMessageBox::Ok);
+    }
     QObject::disconnect(this->DiscoverAgent,SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),this,SLOT(Discoverd(QBluetoothDeviceInfo)));
     this->DeviceInfo.clear();
     this->DiscoverAgent->stop();
@@ -50,7 +54,9 @@ void BlueTooth::BlueToothConnect(QBluetoothDeviceInfo Base)
 
 void BlueTooth::Connected()
 {
+    emit this->ConnectOK(true);
     QMessageBox::information(NULL,"连接","已连接成功!",QMessageBox::Ok);
+
 }
 
 void BlueTooth::BlueToothDisConnect()
@@ -62,7 +68,9 @@ void BlueTooth::BlueToothDisConnect()
 
 void BlueTooth::Disconnected()
 {
+    emit this->DisConnetOK(true);
     QMessageBox::information(NULL,"断开","已断开成功!",QMessageBox::Ok);
+
 }
 
 void BlueTooth::SafeWrite(QString data)

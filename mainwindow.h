@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <configwindow.h>
 #include "bluetooth.h"
+#include <QDesktopServices>
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,8 @@ private slots:
     void Slot7();
     void Slot8();
     void Slot9();
+    void ConnetOKSlot();
+    void DisconnetOKSlot();
 
 private:
     Ui::MainWindow *ui;

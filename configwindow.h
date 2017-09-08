@@ -18,7 +18,7 @@ public:
     explicit ConfigWindow(QWidget *parent = 0);
     ~ConfigWindow();
     BlueTooth *PortBase;
-
+    void SetButton();
 private slots:
     void PowerSlot();
     void ScanSlot();
@@ -27,9 +27,12 @@ private slots:
     void ReceiveSlot();
     void SendSlot();
     void SaveSlot();
+    void ConnetOKSlot(bool ok);
+    void DisconnetOKSlot(bool ok);
 
 private:
     Ui::ConfigWindow *ui;
+
 };
 
 #if _MSC_VER >= 1600

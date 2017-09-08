@@ -27,14 +27,14 @@ public:
     QList<QBluetoothDeviceInfo> DeviceInfo;
     QBluetoothSocket *Socket;
     QBluetoothDeviceInfo CurrentDeviceInfo;
-
+    QBluetoothLocalDevice *LocalDevice;
 public slots:
 
 
 private:
     QLatin1String ServiceUuid;
     QBluetoothDeviceDiscoveryAgent *DiscoverAgent;
-    QBluetoothLocalDevice *LocalDevice;
+
 
 private slots:
     void Connected();
@@ -44,6 +44,8 @@ private slots:
 
 signals:
     void DisCoverdSignal(QBluetoothDeviceInfo);
+    void ConnectOK(bool);
+    void DisConnetOK(bool);
 };
 
 #endif // BLUETOOTH_H

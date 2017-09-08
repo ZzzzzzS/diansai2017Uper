@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->RightButton,SIGNAL(clicked(bool)),this,SLOT(RightSlot()));
     QObject::connect(ui->UpButton,SIGNAL(clicked(bool)),this,SLOT(UpSlot()));
     QObject::connect(ui->DownButton,SIGNAL(clicked(bool)),this,SLOT(DownSlot()));
+
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +36,7 @@ void MainWindow::ConfigSlot()
     ConfigWindow windowBase;
     windowBase.PortBase=this->PortBase;
     windowBase.showFullScreen();
+    windowBase.SetButton();
     //windowBase.show();
     windowBase.exec();
     if(this->PortBase->Socket->state()==QBluetoothSocket::ConnectedState)
@@ -51,13 +53,27 @@ void MainWindow::ConfigSlot()
 
 void MainWindow::PowerSlot()
 {
+    if(this->PortBase->LocalDevice->hostMode()==QBluetoothLocalDevice::HostPoweredOff)
+    {
+        QMessageBox::information(this,"蓝牙未打开","请打开蓝牙后重试",QMessageBox::Ok);
+        this->ConfigSlot();
+        return;
+    }
+    if(this->PortBase->CurrentDeviceInfo.name().isEmpty())
+    {
+        QMessageBox::information(this,"蓝牙未连接","请重新扫描蓝牙后重试",QMessageBox::Ok);
+        ConfigSlot();
+        return;
+    }
+    QObject::connect(this->PortBase,SIGNAL(ConnectOK()),this,SLOT(ConnetOKSlot()));
+    QObject::connect(this->PortBase,SIGNAL(DisConnetOK()),this,SLOT(DisconnetOKSlot()));
     if(ui->PowerButton->text()=="连接")
         {
           this->PortBase->BlueToothConnect(this->PortBase->CurrentDeviceInfo);
           ui->PowerButton->setText("断开");
           QObject::connect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
         }
-        else
+        else if(ui->PowerButton->text()=="断开")
         {
             this->PortBase->BlueToothDisConnect();
             QObject::disconnect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
@@ -138,4 +154,14 @@ void MainWindow::Slot8()
 void MainWindow::Slot9()
 {
     this->PortBase->SafeWrite("q9");
+}
+
+void MainWindow::DisconnetOKSlot()
+{
+    ui->PowerButton->setText("连接");
+}
+
+void MainWindow::ConnetOKSlot()
+{
+    ui->PowerButton->setText("断开");
 }
