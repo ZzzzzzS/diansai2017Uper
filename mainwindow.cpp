@@ -143,7 +143,7 @@ void MainWindow::Slot6()
 
 void MainWindow::Slot7()
 {
-    this->PortBase->SafeWrite("s7");
+    this->PortBase->SafeWrite("q7");
 }
 
 void MainWindow::Slot8()
