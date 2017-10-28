@@ -40,7 +40,9 @@ Qt蓝牙主要有以下3个类
 使用前需要在pro中添加 </br>
 ``QT += bluetooth `` </br>
 添加头文件</br>
-```#include <QtBluetooth> 
+
+```
+#include <QtBluetooth> 
 #include <QBluetoothAddress>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QBluetoothLocalDevice>
@@ -58,7 +60,7 @@ BlueTooth::BlueTooth(QWidget *parent) : QWidget(parent)
     this->Socket=new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
 }
 ```
-###蓝牙打开与关闭
+### 蓝牙打开与关闭
 蓝牙打开与关闭很简单,需要注意的是部分安卓手机权限审核非常严格,可能还是需要在系统里面手动打开关闭蓝牙.
 ```
 void BlueTooth::Power(bool Power)
