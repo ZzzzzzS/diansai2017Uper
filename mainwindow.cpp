@@ -36,6 +36,7 @@ MainWindow::~MainWindow()
 void MainWindow::ConfigSlot()
 {
     QObject::disconnect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));
+    ui->tabWidget->setCurrentIndex(1);
     ConfigWindow windowBase;
     windowBase.PortBase=this->PortBase;
     windowBase.showFullScreen();
