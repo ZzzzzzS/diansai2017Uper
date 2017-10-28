@@ -5,6 +5,9 @@
 #include <configwindow.h>
 #include "bluetooth.h"
 #include <QDesktopServices>
+#include <QtSensors/QAccelerometer>
+#include <QTimer>
+#include <QGyroscope>
 
 namespace Ui {
 class MainWindow;
@@ -39,9 +42,13 @@ private slots:
     void Slot9();
     void ConnetOKSlot();
     void DisconnetOKSlot();
-
+    void AcceScan();
 private:
     Ui::MainWindow *ui;
+
+    QTimer AcceScanTimer;
+    QAccelerometer AcceSensor;
+    double x,y,z;
 };
 #if _MSC_VER >= 1600
 #pragma execution_character_set("utf-8")

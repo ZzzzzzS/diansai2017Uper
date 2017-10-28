@@ -33,10 +33,10 @@
        <string>控制</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
+       <item row="0" column="1">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="DirectionTab">
           <attribute name="title">
@@ -240,6 +240,80 @@
                 </widget>
                </item>
               </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>神奇控制</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="title">
+                <string>坐标参数</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_6">
+                <item row="0" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_3">
+                    <item>
+                     <widget class="QLabel" name="label">
+                      <property name="text">
+                       <string>X:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_2">
+                      <property name="text">
+                       <string>Y:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_3">
+                      <property name="text">
+                       <string>Z:</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <item>
+                     <widget class="QLineEdit" name="XLine"/>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="YLine"/>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="ZLine"/>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_4">
+               <property name="title">
+                <string>操作记录</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_7">
+                <item row="0" column="0">
+                 <widget class="QTextEdit" name="InformationEdit"/>
+                </item>
+               </layout>
+              </widget>
              </item>
             </layout>
            </item>

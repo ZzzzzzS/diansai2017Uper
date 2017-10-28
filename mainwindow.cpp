@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->RightButton,SIGNAL(clicked(bool)),this,SLOT(RightSlot()));
     QObject::connect(ui->UpButton,SIGNAL(clicked(bool)),this,SLOT(UpSlot()));
     QObject::connect(ui->DownButton,SIGNAL(clicked(bool)),this,SLOT(DownSlot()));
+    this->AcceSensor.start();
+    this->AcceScanTimer.start(10);
+    QObject::connect(&AcceScanTimer,SIGNAL(timeout()),this,SLOT(AcceScan()));
 
 }
 
@@ -164,4 +167,54 @@ void MainWindow::DisconnetOKSlot()
 void MainWindow::ConnetOKSlot()
 {
     ui->PowerButton->setText("断开");
+}
+
+void MainWindow::AcceScan()
+{
+    static char motion=0;
+    //读取传感器的值
+    this->x=AcceSensor.reading()->x();
+    this->y=AcceSensor.reading()->y();
+    this->z=AcceSensor.reading()->z();
+    //显示在屏幕上
+    ui->ZLine->setText(QString::number(this->z));
+    ui->XLine->setText(QString::number(this->x));
+    ui->YLine->setText(QString::number(this->y));
+
+    if(motion!=0)
+    {
+        motion++;
+    }
+    if(motion>=100)
+        motion=0;
+
+    if(motion==0)
+    {
+        if(x>5)//<<
+        {
+            LeftSlot();
+            ui->InformationEdit->append("小球向左移动");
+        }
+        else if(x<-5)//>>
+        {
+            RightSlot();
+            ui->InformationEdit->append("小球向右移动");
+        }
+        else if(y>3)//向下
+        {
+            DownSlot();
+            ui->InformationEdit->append("小球向下移动");
+        }
+        else if(y<-3)//向上
+        {
+            UpSlot();
+            ui->InformationEdit->append("小球向上移动");
+        }
+        motion=1;
+    }
+
+
+
+
+
 }
