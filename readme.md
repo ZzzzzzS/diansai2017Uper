@@ -37,9 +37,9 @@ Qt蓝牙主要有以下3个类
 * QBluetoothLocalDevice 负责蓝牙设备开关状态以及工作模式
 * QBluetoothSocket 负责蓝牙的数据传输
 
-使用前需要在pro中添加 </br>
-``QT += bluetooth `` </br>
-添加头文件</br>
+使用前需要在pro中添加
+``QT += bluetooth `` 
+添加头文件
 
 ```
 #include <QtBluetooth> 
@@ -170,7 +170,9 @@ void BlueTooth::SafeWrite(QString data)
 蓝牙的传入就要相对复杂一些,和串口一样需要使用到信号槽实现,有点类似于单片机当中的UART中断
 首先是初始化信号槽`` QObject::connect(this->PortBase->Socket,SIGNAL(readyRead()),this,SLOT(ReceiveSlot()));``
 其次是槽函数
-```void ConfigWindow::ReceiveSlot()
+
+```
+void ConfigWindow::ReceiveSlot()
 {
     if(ui->HEXBox->isChecked())
     {
@@ -191,26 +193,28 @@ void BlueTooth::SafeWrite(QString data)
     }
 }
 ```
+
 蓝牙部分大概就说这么多,其实这也只涉及Qt蓝牙操作当中的冰山一角,还有很多的部分值得我们去研究.
 ***
 # Qt安卓读取加速度计简介
-说起读取加速度计,那么一定要提到Qt的传感器类了.Qt的传感器类为我们提供了访问手机传感器的功能.读取传感器以前都需要在pro文件里面添加</br>
+说起读取加速度计,那么一定要提到Qt的传感器类了.Qt的传感器类为我们提供了访问手机传感器的功能.读取传感器以前都需要在pro文件里面添加
 ``
-QT       += sensors``
+QT       += sensors
+``
 
 ### 陀螺仪读取
 #### 初始化
 由于我们是读取陀螺仪,那么就需要使用QAccelerometer类
-需要包含头文件</br>``#include <QtSensors/QAccelerometer>``</br>
-同理,如果我们读取陀螺仪,那么就需要使用QGyroscope类,包含</br>``#include <QGyroscope>``</br>
-我初始化时设置成定时器周期读取加速度计的值,所以在初始化的过程中也用到了QTimer类,以下是代码</br>
+需要包含头文件``#include <QtSensors/QAccelerometer>``
+同理,如果我们读取陀螺仪,那么就需要使用QGyroscope类,包含 ``#include <QGyroscope>``
+我初始化时设置成定时器周期读取加速度计的值,所以在初始化的过程中也用到了QTimer类,以下是代码
 ```
     this->AcceSensor.start();//初始化传感器
     this->AcceScanTimer.start(10);//初始化定时器
     QObject::connect(&AcceScanTimer,SIGNAL(timeout()),this,SLOT(AcceScan()));
 ```
 ###读取值
-读取值非常简单,一句话即可搞定,以下是读取代码</br>
+读取值非常简单,一句话即可搞定,以下是读取代码
 ```
 //读取传感器的值
         this->x=AcceSensor.reading()->x();
@@ -219,10 +223,10 @@ QT       += sensors``
 ```
 需要注意,读取回来的类型实际上就是double类型,不要被Qt的typedef所迷惑
 
-**到这里整个加速度计的使用就完了**</br>相比单片机又要配置i2c,又要配置陀螺仪寄存器,读取回来还要自己计算角度,自己滤波,安卓上面确实简单了太多. 
+**到这里整个加速度计的使用就完了**相比单片机又要配置i2c,又要配置陀螺仪寄存器,读取回来还要自己计算角度,自己滤波,安卓上面确实简单了太多. 
     
 ***
 # 写在最后
-**其实写到这里我已经不想再写下去了,但是谁叫我强迫症突然发作呢**</br>
-虽然遗憾没能拿到国电赛一等奖,没能在总决赛上使用这个上位机.学习编写安卓上位机的整个过程却学习到了很多知识.毕竟学习知识的过程才是最重要的.</br>我下一步计划开发ios版蓝牙上位机,研究cc2541蓝牙模块配合上位机使用.同时也计划开发一个功能更复杂,界面更精美,可以在线调试多种参数的上位机供18年智能汽车竞赛调试使用.
+**其实写到这里我已经不想再写下去了,但是谁叫我强迫症突然发作呢**
+虽然遗憾没能拿到国电赛一等奖,没能在总决赛上使用这个上位机.学习编写安卓上位机的整个过程却学习到了很多知识.毕竟学习知识的过程才是最重要的.我下一步计划开发ios版蓝牙上位机,研究cc2541蓝牙模块配合上位机使用.同时也计划开发一个功能更复杂,界面更精美,可以在线调试多种参数的上位机供18年智能汽车竞赛调试使用.
 
